@@ -3,8 +3,8 @@
 die() { echo $*; exit 1; } >&2
 
 iso_date=$(date -I)
-weekname=week-$(date +%V)
-postname=${iso_date}_$weekname.md
+weekname=week_$(date +%V)
+postname=${iso_date}-$weekname.markdown
 
 if $(test -e _posts/$postname); then
     die "post _posts/$postname" already exists
