@@ -1,0 +1,21 @@
+#!/bin/bash -eu
+
+die() { echo $*; exit 1; } >&2
+
+iso_date=$(date -I)
+weekname=week-$(date +%V)
+postname=${iso_date}_$weekname.md
+
+if $(test -e _posts/$postname); then
+    die "post _posts/$postname" already exists
+fi
+
+echo "
+---
+layout: post
+title: '$weekname'
+date: $iso_date
+---
+" | tr "'" '"' > _posts/$postname
+
+echo "$(ls _posts/$postname) created!"
